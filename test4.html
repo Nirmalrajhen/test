@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<!-- Viewport for mobile scaling -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+height: 100vh;
+margin: 0;
+font-family: 'Segoe UI', sans-serif;
+overflow: hidden;
+}
+
+/* Blurred background */
+#bg {
+position: fixed;
+inset: 0;
+background: url('us.PNG') center/cover no-repeat;
+filter: blur(18px) brightness(0.7);
+transform: scale(1.1);
+display: none;
+z-index: 0;
+}
+
+/* Main content */
+#content {
+position: relative;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+z-index: 1;
+padding: 0 10px;
+}
+
+h1 {
+color: #b3003b;
+margin-bottom: 10px;
+font-size: 24px;
+}
+
+#tease {
+font-size: 16px;
+color: #ff3366;
+font-style: italic;
+margin-bottom: 30px;
+}
+
+.buttons {
+position: relative;
+width: 80%;
+max-width: 300px;
+height: 200px;
+}
+
+button {
+padding: 14px 28px;
+font-size: 20px;
+border: none;
+border-radius: 30px;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+#yes {
+background-color: #ff3366;
+color: white;
+box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#no {
+position: absolute;
+background-color: #ddd;
+}
+
+#loveMessage {
+display: none;
+font-size: 36px;
+color: white;
+text-shadow: 0 0 12px #ff4d6d;
+margin-bottom: 20px;
+animation: pop 1s ease forwards;
+}
+
+@keyframes pop {
+from { transform: scale(0); opacity: 0; }
+to { transform: scale(1); opacity: 1; }
+}
+
+/* Center photo */
+#photo {
+display: none;
+width: 90vw;
+max-width: 500px;
+height: auto;
+max-height: 60vh;
+background: url('us.PNG') center/contain no-repeat;
+border-radius: 20px;
+box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.heart {
+position: absolute;
+font-size: 24px;
+animation: floatUp 4s linear infinite;
+opacity: 0.9;
+z-index: 2;
+}
+
+@keyframes floatUp {
+0% { transform: translateY(0) scale(1); opacity: 1; }
+100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+h1 {
+font-size: 20px;
+}
+#tease {
+font-size: 14px;
+}
+button {
+font-size: 18px;
+padding: 12px 24px;
+}
+#loveMessage {
+font-size: 28px;
+}
+#photo {
+width: 95vw;
+max-height: 50vh;
+}
+}
+</style>
+</head>
+<body>
+
+<div id="bg"></div>
+
+<div id="content">
+<h1 id="question">Renu, will you be my Valentine? 💘</h1>
+<p id="tease">Give a try to select No 😉</p>
+
+<div class="buttons" id="buttons">
+<button id="yes" onclick="showLove()">Yes</button>
+<button id="no">No</button>
+</div>
+
+<div id="loveMessage">Love you ❤️🥰</div>
+<div id="photo"></div>
+</div>
+
+<script>
+const noButton = document.getElementById("no");
+const container = document.querySelector(".buttons");
+
+noButton.addEventListener("mouseenter", () => {
+const maxX = container.clientWidth - noButton.offsetWidth;
+const maxY = container.clientHeight - noButton.offsetHeight;
+noButton.style.left = Math.random() * maxX + "px";
+noButton.style.top = Math.random() * maxY + "px";
+});
+
+function showLove() {
+document.getElementById("bg").style.display = "block";
+document.getElementById("buttons").style.display = "none";
+document.getElementById("question").style.display = "none";
+document.getElementById("tease").style.display = "none";
+document.getElementById("loveMessage").style.display = "block";
+document.getElementById("photo").style.display = "block";
+createHearts();
+}
+
+function createHearts() {
+setInterval(() => {
+const heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "❤️";
+heart.style.left = Math.random() * 100 + "vw";
+heart.style.bottom = "0";
+document.body.appendChild(heart);
+setTimeout(() => heart.remove(), 4000);
+}, 300);
+}
+</script>
+
+</body>
+</html>
